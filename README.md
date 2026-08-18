@@ -7,7 +7,7 @@ Predicting whether a higher-education student will **drop out**, stay **enrolled
 | | |
 |---|---|
 | 🔗 **GitHub repository** | https://github.com/rishigudimetla/2025AC05991 |
-| 🚀 **Live Streamlit app** | https://REPLACE-ME.streamlit.app |
+| 🚀 **Live Streamlit app** | https://rishigudimetla-2025ac05991-app-26xzre.streamlit.app |
 | 📊 **Dataset** | [Predict Students' Dropout and Academic Success](https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success) — UCI Machine Learning Repository, dataset ID 697 |
 | 🏆 **Best model** | **Random Forest (Ensemble)** (accuracy 0.7684, macro-F1 0.7171, MCC 0.6240) |
 | 🧪 **Executed on** | BITS Virtual Lab (screenshot included in the submitted PDF) |
@@ -272,7 +272,7 @@ Three findings that hold across every model:
 
 ## Streamlit application
 
-**Live app: https://REPLACE-ME.streamlit.app** — deployed on Streamlit Community Cloud (free tier).
+**Live app: https://rishigudimetla-2025ac05991-app-26xzre.streamlit.app** — deployed on Streamlit Community Cloud (free tier).
 
 Features, mapped to the assignment's requirements:
 
