@@ -1,4 +1,4 @@
-# 🎓 Student Outcome Radar — Machine Learning Assignment 2
+# Student Outcome Radar — Machine Learning Assignment 2
 
 **M.Tech (AIML / DSE) · Work Integrated Learning Programmes Division, BITS Pilani**
 Predicting whether a higher-education student will **drop out**, stay **enrolled**, or
@@ -6,11 +6,11 @@ Predicting whether a higher-education student will **drop out**, stay **enrolled
 
 | | |
 |---|---|
-| 🔗 **GitHub repository** | https://github.com/rishigudimetla/2025AC05991 |
-| 🚀 **Live Streamlit app** | https://rishigudimetla-2025ac05991-app-26xzre.streamlit.app |
-| 📊 **Dataset** | [Predict Students' Dropout and Academic Success](https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success) — UCI Machine Learning Repository, dataset ID 697 |
-| 🏆 **Best model** | **Random Forest (Ensemble)** (accuracy 0.7684, macro-F1 0.7171, MCC 0.6240) |
-| 🧪 **Executed on** | BITS Virtual Lab (screenshot included in the submitted PDF) |
+| **GitHub repository** | https://github.com/rishigudimetla/2025AC05991 |
+| **Live Streamlit app** | https://rishigudimetla-2025ac05991-app-26xzre.streamlit.app |
+| **Dataset** | [Predict Students' Dropout and Academic Success](https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success) — UCI Machine Learning Repository, dataset ID 697 |
+| **Best model** | **Random Forest (Ensemble)** (accuracy 0.7684, macro-F1 0.7171, MCC 0.6240) |
+| **Executed on** | BITS Virtual Lab (screenshot included in the submitted PDF) |
 
 ---
 
@@ -55,13 +55,13 @@ Source URL: https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and
 
 | Property | Value | Assignment requirement | Status |
 |---|---|---|---|
-| Instances | **4,424** | ≥ 500 | ✅ |
-| Features | **36** | ≥ 12 | ✅ |
-| Classes | 3 (Dropout, Enrolled, Graduate) | binary *or* multi-class | ✅ multi-class |
-| Missing values | 0 | — | ✅ no imputation needed |
-| Duplicate rows | 0 | — | ✅ |
-| Source repository | UCI Machine Learning Repository (ID 697) | Kaggle or UCI | ✅ |
-| Licence | CC BY 4.0 | — | ✅ redistributable |
+| Instances | **4,424** | >= 500 | Met |
+| Features | **36** | >= 12 | Met |
+| Classes | 3 (Dropout, Enrolled, Graduate) | binary *or* multi-class | Met (multi-class) |
+| Missing values | 0 | - | Met, no imputation needed |
+| Duplicate rows | 0 | - | Met |
+| Source repository | UCI Machine Learning Repository (ID 697) | Kaggle or UCI | Met |
+| Licence | CC BY 4.0 | - | Met, redistributable |
 
 ### Target variable
 
@@ -103,7 +103,7 @@ the free Streamlit tier light.
 **https://github.com/rishigudimetla/2025AC05991**
 
 ```
-ml-assignment2/
+2025AC05991/
 ├── app.py                    # Streamlit application (deployed entry point)
 ├── ml_core.py                # shared preprocessing, model zoo, metric definitions
 ├── requirements.txt          # pinned dependencies
@@ -131,7 +131,7 @@ ml-assignment2/
 
 ```bash
 git clone https://github.com/rishigudimetla/2025AC05991
-cd ml-assignment2
+cd 2025AC05991
 python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
@@ -280,8 +280,8 @@ Features, mapped to the assignment's requirements:
 |---|---|---|
 | **a. Dataset upload option (CSV)** | Sidebar → *1 · Test data* → **Upload my own test CSV** | Accepts any CSV with the 36 feature columns. Header quirks are tidied, non-numeric cells and NaN rows are reported and dropped, unexpected columns are ignored, and a missing feature produces a readable error instead of a stack trace. With a `Target` column you get full metrics; without one the app switches to prediction-only mode. Only test data is uploaded, per the brief. A **Download bundled test_data.csv** button provides a template. |
 | **b. Model selection dropdown** | Sidebar → *2 · Model* → **Choose a model** | All six trained pipelines, with a one-line description of the selected one. Every chart and table on the page follows the selection. |
-| **c. Display of evaluation metrics** | Tab **📊 Model evaluation** and tab **🏁 Compare all models** | The six required metrics as cards, each showing the delta against the offline training run (so the deployed artefact is provably the evaluated one), plus a full six-model comparison table with a colour gradient and a sortable bar chart per metric. |
-| **d. Confusion matrix / classification report** | Tab **📊 Model evaluation** | Confusion-matrix heatmap (raw counts or row-normalised), per-class precision / recall / F1 / support table, the plain-text `classification_report`, and one-vs-rest ROC curves with per-class AUC. |
+| **c. Display of evaluation metrics** | Tab **Model evaluation** and tab **Compare all models** | The six required metrics as cards, each showing the delta against the offline training run (so the deployed artefact is provably the evaluated one), plus a full six-model comparison table with a colour gradient and a sortable bar chart per metric. |
+| **d. Confusion matrix / classification report** | Tab **Model evaluation** | Confusion-matrix heatmap (raw counts or row-normalised), per-class precision / recall / F1 / support table, the plain-text `classification_report`, and one-vs-rest ROC curves with per-class AUC. |
 
 Extras beyond the requirement: per-student prediction table with class probabilities and a
 confidence column, a "show only mis-classified rows" filter, predicted-class distribution
