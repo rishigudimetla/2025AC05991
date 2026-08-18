@@ -6,7 +6,7 @@ Predicting whether a higher-education student will **drop out**, stay **enrolled
 
 | | |
 |---|---|
-| 🔗 **GitHub repository** | https://github.com/rishigudimetla/ml-assignment2-student-outcome-radar |
+| 🔗 **GitHub repository** | https://github.com/rishigudimetla/2025AC05991 |
 | 🚀 **Live Streamlit app** | https://REPLACE-ME.streamlit.app |
 | 📊 **Dataset** | [Predict Students' Dropout and Academic Success](https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success) — UCI Machine Learning Repository, dataset ID 697 |
 | 🏆 **Best model** | **Random Forest (Ensemble)** (accuracy 0.7684, macro-F1 0.7171, MCC 0.6240) |
@@ -100,7 +100,7 @@ the free Streamlit tier light.
 
 ## c. GitHub repository link
 
-**https://github.com/rishigudimetla/ml-assignment2-student-outcome-radar**
+**https://github.com/rishigudimetla/2025AC05991**
 
 ```
 ml-assignment2/
@@ -130,7 +130,7 @@ ml-assignment2/
 ### Reproduce from scratch
 
 ```bash
-git clone https://github.com/rishigudimetla/ml-assignment2-student-outcome-radar
+git clone https://github.com/rishigudimetla/2025AC05991
 cd ml-assignment2
 python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
