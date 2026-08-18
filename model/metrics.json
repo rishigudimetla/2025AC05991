@@ -1,0 +1,527 @@
+{
+  "dataset": {
+    "name": "Predict Students' Dropout and Academic Success",
+    "source": "UCI Machine Learning Repository, dataset ID 697",
+    "url": "https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success",
+    "instances": 4424,
+    "features": 36,
+    "classes": [
+      "Dropout",
+      "Enrolled",
+      "Graduate"
+    ],
+    "class_counts": {
+      "Graduate": 2209,
+      "Dropout": 1421,
+      "Enrolled": 794
+    }
+  },
+  "split": {
+    "test_fraction": 0.2,
+    "random_state": 42,
+    "train_rows": 3539,
+    "test_rows": 885,
+    "stratified": true
+  },
+  "averaging": "macro (3-class problem); AUC = one-vs-rest macro",
+  "preprocessing": {
+    "one_hot": [
+      "Marital status",
+      "Application mode",
+      "Course",
+      "Previous qualification",
+      "Nacionality",
+      "Mother's qualification",
+      "Father's qualification",
+      "Mother's occupation",
+      "Father's occupation"
+    ],
+    "standard_scaled": [
+      "Application order",
+      "Previous qualification (grade)",
+      "Admission grade",
+      "Age at enrollment",
+      "Curricular units 1st sem (credited)",
+      "Curricular units 1st sem (enrolled)",
+      "Curricular units 1st sem (evaluations)",
+      "Curricular units 1st sem (approved)",
+      "Curricular units 1st sem (grade)",
+      "Curricular units 1st sem (without evaluations)",
+      "Curricular units 2nd sem (credited)",
+      "Curricular units 2nd sem (enrolled)",
+      "Curricular units 2nd sem (evaluations)",
+      "Curricular units 2nd sem (approved)",
+      "Curricular units 2nd sem (grade)",
+      "Curricular units 2nd sem (without evaluations)",
+      "Unemployment rate",
+      "Inflation rate",
+      "GDP"
+    ],
+    "passthrough_binary": [
+      "Daytime/evening attendance",
+      "Displaced",
+      "Educational special needs",
+      "Debtor",
+      "Tuition fees up to date",
+      "Gender",
+      "Scholarship holder",
+      "International"
+    ],
+    "expanded_dimensionality": 236
+  },
+  "artefact_size_mb": {
+    "Logistic Regression": 0.01,
+    "Decision Tree": 0.01,
+    "kNN": 0.39,
+    "Naive Bayes": 0.01,
+    "Random Forest (Ensemble)": 12.53,
+    "Gradient Boosting (Ensemble, extra)": 0.2
+  },
+  "inference_ms_full_testset": {
+    "Logistic Regression": 2.5,
+    "Decision Tree": 2.6,
+    "kNN": 77.2,
+    "Naive Bayes": 3.2,
+    "Random Forest (Ensemble)": 39.6,
+    "Gradient Boosting (Ensemble, extra)": 6.7
+  },
+  "feature_columns": [
+    "Marital status",
+    "Application mode",
+    "Application order",
+    "Course",
+    "Daytime/evening attendance",
+    "Previous qualification",
+    "Previous qualification (grade)",
+    "Nacionality",
+    "Mother's qualification",
+    "Father's qualification",
+    "Mother's occupation",
+    "Father's occupation",
+    "Admission grade",
+    "Displaced",
+    "Educational special needs",
+    "Debtor",
+    "Tuition fees up to date",
+    "Gender",
+    "Scholarship holder",
+    "Age at enrollment",
+    "International",
+    "Curricular units 1st sem (credited)",
+    "Curricular units 1st sem (enrolled)",
+    "Curricular units 1st sem (evaluations)",
+    "Curricular units 1st sem (approved)",
+    "Curricular units 1st sem (grade)",
+    "Curricular units 1st sem (without evaluations)",
+    "Curricular units 2nd sem (credited)",
+    "Curricular units 2nd sem (enrolled)",
+    "Curricular units 2nd sem (evaluations)",
+    "Curricular units 2nd sem (approved)",
+    "Curricular units 2nd sem (grade)",
+    "Curricular units 2nd sem (without evaluations)",
+    "Unemployment rate",
+    "Inflation rate",
+    "GDP"
+  ],
+  "target_column": "Target",
+  "models": {
+    "Logistic Regression": "logistic_regression.joblib",
+    "Decision Tree": "decision_tree.joblib",
+    "kNN": "knn.joblib",
+    "Naive Bayes": "naive_bayes.joblib",
+    "Random Forest (Ensemble)": "random_forest.joblib",
+    "Gradient Boosting (Ensemble, extra)": "gradient_boosting.joblib"
+  },
+  "best_params": {
+    "Logistic Regression": {
+      "C": 0.05
+    },
+    "Decision Tree": {
+      "criterion": "gini",
+      "max_depth": 6,
+      "min_samples_leaf": 1
+    },
+    "kNN": {
+      "n_neighbors": 5,
+      "p": 1,
+      "weights": "uniform"
+    },
+    "Naive Bayes": {
+      "var_smoothing": 0.1
+    },
+    "Random Forest (Ensemble)": {
+      "max_depth": null,
+      "max_features": "sqrt",
+      "min_samples_leaf": 3
+    },
+    "Gradient Boosting (Ensemble, extra)": {
+      "learning_rate": 0.1,
+      "max_depth": 3,
+      "n_estimators": 200
+    }
+  },
+  "cv_macro_f1": {
+    "Logistic Regression": 0.712478355444474,
+    "Decision Tree": 0.6699540355152538,
+    "kNN": 0.6221517617509675,
+    "Naive Bayes": 0.6323499584760228,
+    "Random Forest (Ensemble)": 0.7154159856943052,
+    "Gradient Boosting (Ensemble, extra)": 0.7127555458431194
+  },
+  "metrics": {
+    "Logistic Regression": {
+      "Accuracy": 0.732203,
+      "AUC": 0.885883,
+      "Precision": 0.703853,
+      "Recall": 0.706157,
+      "F1": 0.694026,
+      "MCC": 0.585613
+    },
+    "Decision Tree": {
+      "Accuracy": 0.648588,
+      "AUC": 0.824034,
+      "Precision": 0.666001,
+      "Recall": 0.657983,
+      "F1": 0.631369,
+      "MCC": 0.492857
+    },
+    "kNN": {
+      "Accuracy": 0.693785,
+      "AUC": 0.797893,
+      "Precision": 0.629412,
+      "Recall": 0.597796,
+      "F1": 0.604991,
+      "MCC": 0.487577
+    },
+    "Naive Bayes": {
+      "Accuracy": 0.681356,
+      "AUC": 0.816329,
+      "Precision": 0.620047,
+      "Recall": 0.594784,
+      "F1": 0.600947,
+      "MCC": 0.472525
+    },
+    "Random Forest (Ensemble)": {
+      "Accuracy": 0.768362,
+      "AUC": 0.887645,
+      "Precision": 0.720326,
+      "Recall": 0.716449,
+      "F1": 0.717083,
+      "MCC": 0.623967
+    },
+    "Gradient Boosting (Ensemble, extra)": {
+      "Accuracy": 0.758192,
+      "AUC": 0.882039,
+      "Precision": 0.697691,
+      "Recall": 0.678286,
+      "F1": 0.685174,
+      "MCC": 0.599976
+    }
+  },
+  "confusion_matrices": {
+    "Logistic Regression": [
+      [
+        192,
+        68,
+        24
+      ],
+      [
+        27,
+        102,
+        30
+      ],
+      [
+        13,
+        75,
+        354
+      ]
+    ],
+    "Decision Tree": [
+      [
+        175,
+        85,
+        24
+      ],
+      [
+        20,
+        113,
+        26
+      ],
+      [
+        22,
+        134,
+        286
+      ]
+    ],
+    "kNN": [
+      [
+        174,
+        42,
+        68
+      ],
+      [
+        35,
+        46,
+        78
+      ],
+      [
+        26,
+        22,
+        394
+      ]
+    ],
+    "Naive Bayes": [
+      [
+        161,
+        66,
+        57
+      ],
+      [
+        26,
+        54,
+        79
+      ],
+      [
+        27,
+        27,
+        388
+      ]
+    ],
+    "Random Forest (Ensemble)": [
+      [
+        207,
+        44,
+        33
+      ],
+      [
+        33,
+        87,
+        39
+      ],
+      [
+        13,
+        43,
+        386
+      ]
+    ],
+    "Gradient Boosting (Ensemble, extra)": [
+      [
+        209,
+        36,
+        39
+      ],
+      [
+        40,
+        63,
+        56
+      ],
+      [
+        12,
+        31,
+        399
+      ]
+    ]
+  },
+  "per_class_report": {
+    "Logistic Regression": {
+      "Dropout": {
+        "precision": 0.8275862068965517,
+        "recall": 0.676056338028169,
+        "f1-score": 0.7441860465116279,
+        "support": 284.0
+      },
+      "Enrolled": {
+        "precision": 0.4163265306122449,
+        "recall": 0.6415094339622641,
+        "f1-score": 0.504950495049505,
+        "support": 159.0
+      },
+      "Graduate": {
+        "precision": 0.8676470588235294,
+        "recall": 0.8009049773755657,
+        "f1-score": 0.8329411764705882,
+        "support": 442.0
+      },
+      "accuracy": 0.7322033898305085,
+      "macro avg": {
+        "precision": 0.7038532654441086,
+        "recall": 0.706156916455333,
+        "f1-score": 0.6940259060105737,
+        "support": 885.0
+      },
+      "weighted avg": {
+        "precision": 0.7737066679389465,
+        "recall": 0.7322033898305085,
+        "f1-score": 0.7455321648838119,
+        "support": 885.0
+      }
+    },
+    "Decision Tree": {
+      "Dropout": {
+        "precision": 0.8064516129032258,
+        "recall": 0.6161971830985915,
+        "f1-score": 0.6986027944111777,
+        "support": 284.0
+      },
+      "Enrolled": {
+        "precision": 0.34036144578313254,
+        "recall": 0.710691823899371,
+        "f1-score": 0.46028513238289204,
+        "support": 159.0
+      },
+      "Graduate": {
+        "precision": 0.8511904761904762,
+        "recall": 0.6470588235294118,
+        "f1-score": 0.7352185089974294,
+        "support": 442.0
+      },
+      "accuracy": 0.6485875706214689,
+      "macro avg": {
+        "precision": 0.6660011782922782,
+        "recall": 0.6579826101757914,
+        "f1-score": 0.6313688119304998,
+        "support": 885.0
+      },
+      "weighted avg": {
+        "precision": 0.745057534938107,
+        "recall": 0.6485875706214689,
+        "f1-score": 0.6740735713429582,
+        "support": 885.0
+      }
+    },
+    "kNN": {
+      "Dropout": {
+        "precision": 0.7404255319148936,
+        "recall": 0.6126760563380281,
+        "f1-score": 0.6705202312138728,
+        "support": 284.0
+      },
+      "Enrolled": {
+        "precision": 0.41818181818181815,
+        "recall": 0.2893081761006289,
+        "f1-score": 0.3420074349442379,
+        "support": 159.0
+      },
+      "Graduate": {
+        "precision": 0.7296296296296296,
+        "recall": 0.8914027149321267,
+        "f1-score": 0.8024439918533605,
+        "support": 442.0
+      },
+      "accuracy": 0.6937853107344633,
+      "macro avg": {
+        "precision": 0.6294123265754471,
+        "recall": 0.5977956491235946,
+        "f1-score": 0.6049905526704905,
+        "support": 885.0
+      },
+      "weighted avg": {
+        "precision": 0.6771390468373278,
+        "recall": 0.6937853107344633,
+        "f1-score": 0.6773866352769029,
+        "support": 885.0
+      }
+    },
+    "Naive Bayes": {
+      "Dropout": {
+        "precision": 0.7523364485981309,
+        "recall": 0.5669014084507042,
+        "f1-score": 0.6465863453815262,
+        "support": 284.0
+      },
+      "Enrolled": {
+        "precision": 0.3673469387755102,
+        "recall": 0.33962264150943394,
+        "f1-score": 0.35294117647058826,
+        "support": 159.0
+      },
+      "Graduate": {
+        "precision": 0.7404580152671756,
+        "recall": 0.8778280542986425,
+        "f1-score": 0.8033126293995859,
+        "support": 442.0
+      },
+      "accuracy": 0.6813559322033899,
+      "macro avg": {
+        "precision": 0.6200471342136056,
+        "recall": 0.5947840347529268,
+        "f1-score": 0.6009467170839001,
+        "support": 885.0
+      },
+      "weighted avg": {
+        "precision": 0.6772363360624484,
+        "recall": 0.6813559322033899,
+        "f1-score": 0.6721043517986373,
+        "support": 885.0
+      }
+    },
+    "Random Forest (Ensemble)": {
+      "Dropout": {
+        "precision": 0.8181818181818182,
+        "recall": 0.7288732394366197,
+        "f1-score": 0.770949720670391,
+        "support": 284.0
+      },
+      "Enrolled": {
+        "precision": 0.5,
+        "recall": 0.5471698113207547,
+        "f1-score": 0.5225225225225225,
+        "support": 159.0
+      },
+      "Graduate": {
+        "precision": 0.8427947598253275,
+        "recall": 0.8733031674208145,
+        "f1-score": 0.8577777777777778,
+        "support": 442.0
+      },
+      "accuracy": 0.768361581920904,
+      "macro avg": {
+        "precision": 0.720325526002382,
+        "recall": 0.7164487393927296,
+        "f1-score": 0.7170833403235637,
+        "support": 885.0
+      },
+      "weighted avg": {
+        "precision": 0.7733095143575492,
+        "recall": 0.768361581920904,
+        "f1-score": 0.769682010767514,
+        "support": 885.0
+      }
+    },
+    "Gradient Boosting (Ensemble, extra)": {
+      "Dropout": {
+        "precision": 0.8007662835249042,
+        "recall": 0.7359154929577465,
+        "f1-score": 0.7669724770642202,
+        "support": 284.0
+      },
+      "Enrolled": {
+        "precision": 0.4846153846153846,
+        "recall": 0.39622641509433965,
+        "f1-score": 0.4359861591695502,
+        "support": 159.0
+      },
+      "Graduate": {
+        "precision": 0.8076923076923077,
+        "recall": 0.9027149321266968,
+        "f1-score": 0.8525641025641025,
+        "support": 442.0
+      },
+      "accuracy": 0.7581920903954802,
+      "macro avg": {
+        "precision": 0.6976913252775322,
+        "recall": 0.6782856133929277,
+        "f1-score": 0.6851742462659577,
+        "support": 885.0
+      },
+      "weighted avg": {
+        "precision": 0.7474253905931287,
+        "recall": 0.7581920903954802,
+        "f1-score": 0.7502545944943845,
+        "support": 885.0
+      }
+    }
+  },
+  "winner": "Random Forest (Ensemble)",
+  "sklearn_version": "1.9.0"
+}
