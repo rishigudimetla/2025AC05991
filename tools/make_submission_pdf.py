@@ -52,7 +52,7 @@ h2 { font-size: 13pt; margin: 1.4em 0 .5em; font-weight: bold;
      border-bottom: 1px solid #000; padding-bottom: .15em; }
 h3 { font-size: 11.5pt; margin: 1.1em 0 .35em; font-weight: bold; }
 h4 { font-size: 10.5pt; margin: .9em 0 .3em; font-weight: bold; }
-a { color: #000; text-decoration: underline; word-break: break-all; }
+a { color: #0645ad; text-decoration: underline; word-break: break-all; }
 code { font-family: "Courier New", monospace; font-size: 9pt; }
 pre { border: 1px solid #999; padding: .5em .7em; overflow-wrap: break-word;
       white-space: pre-wrap; background: #fff; }
@@ -70,6 +70,8 @@ hr { border: 0; border-top: 1px solid #000; margin: 1.2em 0; }
 .linkbox { margin: 10px 0 14px; }
 .linkbox .label { font-weight: bold; }
 .linkbox .url { word-break: break-all; }
+.linkbox .url a { color: #0645ad; text-decoration: underline; }
+.idhdr { font-weight: bold; font-size: 12pt; margin: 0 0 14px; }
 .linkbox .hint { font-size: 9pt; margin-top: 2px; }
 .shot { page-break-inside: avoid; margin-top: .5em; }
 .shot img { width: 100%; border: 1px solid #000; }
@@ -151,22 +153,12 @@ def build_html(repo: str, app: str, shot: Path | None, student: str, sid: str,
 <style>{CSS}</style></head><body>
 
 <div class="cover">
+  <p class="idhdr">RishiGudimetla-2025AC05991</p>
   <h1>Machine Learning - Assignment 2</h1>
   <p class="sub">Student Outcome Radar: six classification models and a deployed Streamlit application</p>
   <p class="dept">M.Tech (AIML / DSE), Work Integrated Learning Programmes Division, BITS Pilani</p>
 
-  <div class="meta"><table>
-    <tr><td>Student name</td><td>{student}</td></tr>
-    <tr><td>Student ID</td><td>{sid}</td></tr>
-    <tr><td>Course</td><td>Machine Learning - Assignment 2 (15 marks)</td></tr>
-    <tr><td>Dataset</td><td>Predict Students' Dropout and Academic Success - UCI ML Repository, ID 697.<br/>
-        4,424 instances, 36 features, 3 classes (meets the minimum of 500 instances and 12 features)</td></tr>
-    <tr><td>Models implemented</td><td>Logistic Regression, Decision Tree, k-Nearest Neighbours,
-        Gaussian Naive Bayes, Random Forest (ensemble), Gradient Boosting (additional ensemble)</td></tr>
-    <tr><td>Metrics reported</td><td>Accuracy, AUC (one-vs-rest macro), Precision, Recall, F1 and MCC for every model</td></tr>
-    <tr><td>Executed on</td><td>BITS Virtual Lab</td></tr>
-    <tr><td>Date</td><td>{today}</td></tr>
-  </table></div>
+
 
   <h2>Mandatory submission links</h2>
   {linkbox(1, "GitHub Repository Link", repo,
@@ -176,15 +168,7 @@ def build_html(repo: str, app: str, shot: Path | None, student: str, sid: str,
            "Deployed on Streamlit Community Cloud. Opens an interactive front-end with CSV upload, "
            "a model-selection dropdown, evaluation metrics, confusion matrix and classification report.")}
 
-  <h2>Final submission checklist</h2>
-  <table>
-    <tr><th>Item</th><th>Status</th></tr>
-    <tr><td>GitHub repo link works</td><td>Done</td></tr>
-    <tr><td>Streamlit app link opens correctly</td><td>Done</td></tr>
-    <tr><td>App loads without errors</td><td>Done</td></tr>
-    <tr><td>All required app features implemented (upload · dropdown · metrics · confusion matrix)</td><td>Done</td></tr>
-    <tr><td>README.md updated and included in this PDF (below)</td><td>Done</td></tr>
-  </table>
+
 </div>
 
 <div class="section-break">
