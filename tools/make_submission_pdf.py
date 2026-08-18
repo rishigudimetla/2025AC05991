@@ -78,6 +78,19 @@ hr { border: 0; border-top: 1px solid #000; margin: 1.2em 0; }
 .todo { border: 1px solid #000; padding: 22px 16px; text-align: center; font-weight: bold; }
 .caption { font-size: 9pt; margin-top: 4px; font-style: italic; }
 .section-break { page-break-before: always; }
+.idrow { width: 100%; border: 0; margin: 0 0 6mm; }
+.idrow td { border: 0; padding: 0; font-weight: bold; font-size: 13pt; }
+.idrow td.r { text-align: right; }
+h1.ctitle { text-align: center; font-size: 19pt; margin: 0 0 9mm; font-weight: bold; }
+.item { margin: 0; }
+.num { display: inline-block; width: 8mm; font-weight: bold; }
+.lbl { font-weight: bold; }
+.urlline { margin: 0 0 6mm 8mm; }
+.urlline a { color: #0645ad; text-decoration: underline; }
+.headrule { border-bottom: 1px solid #000; padding-bottom: 1.2mm; margin: 0 0 3mm; }
+.subhead { font-weight: bold; border-bottom: 1px solid #000;
+           padding-bottom: 1.2mm; margin: 5mm 0 3mm; }
+.coverimg { width: 148mm; display: block; margin: 0 auto; border: 1px solid #555; }
 """
 
 
@@ -110,13 +123,7 @@ def build_html(repo: str, app: str, shot: Path | None, student: str, sid: str,
     today = date.today().strftime("%d %B %Y")
 
     if shot and shot.exists():
-        shot_block = (
-            f'<div class="shot"><img src="{embed_image(shot)}" alt="BITS Virtual Lab execution"/>'
-            f'<div class="caption">Assignment executed on BITS Virtual Lab — the training '
-            "notebook <code>model/train_models.ipynb</code> running in Jupyter, showing the "
-            "cross-validated and hold-out scores for each classifier."
-            "</div></div>"
-        )
+        shot_block = f'<img class="coverimg" src="{embed_image(shot)}" alt="BITS Virtual Lab execution"/>' 
     else:
         shot_block = (
             '<div class="todo">SCREENSHOT PLACEHOLDER<br/>'
@@ -125,58 +132,41 @@ def build_html(repo: str, app: str, shot: Path | None, student: str, sid: str,
         )
 
     if app_shot and app_shot.exists():
-        app_shot_block = (
-            f'<div class="shot"><img src="{embed_image(app_shot)}" alt="Deployed app"/>'
-            '<div class="caption">Supplementary evidence (not the mandated Section 3 screenshot): '
-            "the deployed Streamlit app opened from BITS Virtual Lab, showing the model dropdown "
-            "set to Random Forest, the confusion matrix, the one-vs-rest ROC curves and the "
-            "per-class classification report. The figures match "
-            "<code>model/metrics.json</code> exactly.</div></div>"
-        )
+        app_shot_block = f'<img class="coverimg" src="{embed_image(app_shot)}" alt="Deployed app"/>' 
     else:
         app_shot_block = ""
 
-    def linkbox(n: int, label: str, url: str, hint: str) -> str:
-        ok = "REPLACE-ME" not in url
-        shown = f'<a href="{url}">{url}</a>' if ok else f"{url} (replace before submitting)"
+    def item(n: int, label: str, url: str) -> str:
+        shown = url if "REPLACE-ME" not in url else f"{url} (replace before submitting)"
         return (
-            f'<div class="linkbox"><div class="label">{n}. {label}</div>'
-            f'<div class="url">{shown}</div><div class="hint">{hint}</div></div>'
+            f'<div class="item"><span class="num">{n}.</span>'
+            f'<span class="lbl">{label}</span></div>'
+            f'<div class="urlline"><a href="{url}">{shown}</a></div>'
         )
 
     app_shot_section = ("" if not app_shot_block else
-        '<div class="section-break"><h2>Appendix — deployed Streamlit application</h2>'
-        + app_shot_block + "</div>")
+        '<div class="subhead">Deployed Streamlit application</div>' + app_shot_block)
 
     return f"""<!doctype html>
 <html><head><meta charset="utf-8"><title>ML Assignment 2 - Submission</title>
 <style>{CSS}</style></head><body>
 
 <div class="cover">
-  <p class="idhdr">RishiGudimetla-2025AC05991</p>
-  <h1>Machine Learning - Assignment 2</h1>
-  <p class="sub">Student Outcome Radar: six classification models and a deployed Streamlit application</p>
-  <p class="dept">M.Tech (AIML / DSE), Work Integrated Learning Programmes Division, BITS Pilani</p>
+  <table class="idrow"><tr>
+    <td class="l">RishiGudimetla</td>
+    <td class="r">{sid}</td>
+  </tr></table>
 
+  <h1 class="ctitle">Machine Learning - Assignment 2</h1>
 
+  {item(1, "GitHub Repository Link:", repo)}
+  {item(2, "Live Streamlit App Link:", app)}
 
-  <h2>Mandatory submission links</h2>
-  {linkbox(1, "GitHub Repository Link", repo,
-           "Contains the complete source code, requirements.txt, README.md and the test data CSV "
-           "(test_data.csv), plus the training script and notebook and all saved model files.")}
-  {linkbox(2, "Live Streamlit App Link", app,
-           "Deployed on Streamlit Community Cloud. Opens an interactive front-end with CSV upload, "
-           "a model-selection dropdown, evaluation metrics, confusion matrix and classification report.")}
-
-
-</div>
-
-<div class="section-break">
-  <h2>3. Screenshot: execution on BITS Virtual Lab</h2>
+  <div class="headrule"><span class="num">3.</span><span class="lbl">Screenshot</span>: execution on BITS Virtual Lab</div>
   {shot_block}
-</div>
 
-{app_shot_section}
+  {app_shot_section}
+</div>
 
 <div class="section-break">
   <h1>4. README.md content</h1>
