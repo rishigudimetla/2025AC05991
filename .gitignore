@@ -1,0 +1,21 @@
+# virtual environments
+.venv/
+venv/
+env/
+
+# build artefacts of the submission PDF
+build/
+
+# raw download archive (rawdata/data.csv itself IS committed for reproducibility)
+uci697.zip
+
+# python cruft
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

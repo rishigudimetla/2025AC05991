@@ -1,0 +1,9 @@
+# Pinned so the deployed app reproduces the exact training environment and the
+# saved *.joblib pipelines unpickle without scikit-learn version warnings.
+streamlit==1.61.1
+scikit-learn==1.9.0
+pandas==3.0.5
+numpy==2.5.2
+matplotlib==3.11.1
+seaborn==0.13.2
+joblib==1.5.3
