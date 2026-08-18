@@ -27,6 +27,7 @@ from ml_core import (  # noqa: E402
     TARGET,
     TEST_CSV,
     TRAIN_CSV,
+    build_pipeline,
     evaluate,
     prepare_test_frame,
     tidy_frame,
@@ -99,6 +100,26 @@ def test_all_six_metrics_present_for_every_model():
         for metric in METRIC_ORDER:
             assert block.get(metric) is not None, f"{name} is missing {metric}"
             assert 0.0 <= block[metric] <= 1.0 or metric == "MCC"
+
+
+@pytest.mark.parametrize("name", list(META["models"]))
+def test_retrain_fallback_reproduces_each_model(name):
+    """app.py refits from train_data.csv if an artefact cannot be unpickled on the cloud.
+
+    That path must produce an equivalent model, so the app degrades without changing results.
+    """
+    train = tidy_frame(pd.read_csv(TRAIN_CSV))
+    test = tidy_frame(pd.read_csv(TEST_CSV))
+    params = META["best_params"].get(name, {})
+
+    rebuilt = build_pipeline(name, train.drop(columns=[TARGET]), params)
+    rebuilt.fit(train.drop(columns=[TARGET]), train[TARGET])
+
+    scored = evaluate(rebuilt, test.drop(columns=[TARGET]), test[TARGET], CLASS_ORDER)
+    for metric in METRIC_ORDER:
+        assert scored[metric] == pytest.approx(META["metrics"][name][metric], abs=1e-6), (
+            f"retrain fallback for {name} diverged on {metric}"
+        )
 
 
 # ------------------------------------------------------- CSV validation
