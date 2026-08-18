@@ -111,14 +111,17 @@ def readme_html() -> str:
     return result.stdout
 
 
-def build_html(repo: str, app: str, shot: Path | None, student: str, sid: str) -> str:
+def build_html(repo: str, app: str, shot: Path | None, student: str, sid: str,
+               app_shot: Path | None = None) -> str:
     today = date.today().strftime("%d %B %Y")
 
     if shot and shot.exists():
         shot_block = (
             f'<div class="shot"><img src="{embed_image(shot)}" alt="BITS Virtual Lab execution"/>'
-            f'<div class="caption">Assignment executed on BITS Virtual Lab — '
-            f"{shot.name}</div></div>"
+            f'<div class="caption">Assignment executed on BITS Virtual Lab — the training '
+            "notebook <code>model/train_models.ipynb</code> running in Jupyter, showing the "
+            "cross-validated and hold-out scores for each classifier."
+            "</div></div>"
         )
     else:
         shot_block = (
@@ -126,6 +129,18 @@ def build_html(repo: str, app: str, shot: Path | None, student: str, sid: str) -
             "Re-run this generator with <code>--screenshot &lt;path-to-png&gt;</code> "
             "to embed the BITS Virtual Lab screenshot.</div>"
         )
+
+    if app_shot and app_shot.exists():
+        app_shot_block = (
+            f'<div class="shot"><img src="{embed_image(app_shot)}" alt="Deployed app"/>'
+            '<div class="caption">Supplementary evidence (not the mandated Section 3 screenshot): '
+            "the deployed Streamlit app opened from BITS Virtual Lab, showing the model dropdown "
+            "set to Random Forest, the confusion matrix, the one-vs-rest ROC curves and the "
+            "per-class classification report. The figures match "
+            "<code>model/metrics.json</code> exactly.</div></div>"
+        )
+    else:
+        app_shot_block = ""
 
     def linkbox(n: int, label: str, url: str, hint: str) -> str:
         ok = "REPLACE-ME" not in url
@@ -135,6 +150,10 @@ def build_html(repo: str, app: str, shot: Path | None, student: str, sid: str) -
             f'<div class="linkbox"><div class="label">{n}. {label}</div>'
             f'<div class="url">{shown}</div><div class="hint">{hint}</div></div>'
         )
+
+    app_shot_section = ("" if not app_shot_block else
+        '<div class="section-break"><h2>Appendix — deployed Streamlit application</h2>'
+        + app_shot_block + "</div>")
 
     return f"""<!doctype html>
 <html><head><meta charset="utf-8"><title>ML Assignment 2 — Submission</title>
@@ -183,6 +202,8 @@ def build_html(repo: str, app: str, shot: Path | None, student: str, sid: str) -
   </table>
 </div>
 
+{app_shot_section}
+
 <div class="section-break">
   <h1>4. README.md content</h1>
   <p class="caption">Reproduced in full from the repository, as required by Section 2, item 4.</p>
@@ -199,6 +220,8 @@ def main() -> None:
     ap.add_argument("--repo", default="https://github.com/REPLACE-ME/ml-assignment2-student-outcome-radar")
     ap.add_argument("--app", default="https://REPLACE-ME.streamlit.app")
     ap.add_argument("--screenshot", default=None, help="path to the BITS Virtual Lab screenshot")
+    ap.add_argument("--app-screenshot", dest="app_screenshot", default=None,
+                    help="optional screenshot of the deployed app (appendix)")
     ap.add_argument("--student", default="Rishi Gudimetla")
     ap.add_argument("--id", dest="sid", default="<student ID>")
     args = ap.parse_args()
@@ -208,7 +231,10 @@ def main() -> None:
         sys.exit(f"Screenshot not found: {shot}")
 
     OUT_HTML.parent.mkdir(parents=True, exist_ok=True)
-    OUT_HTML.write_text(build_html(args.repo, args.app, shot, args.student, args.sid))
+    app_shot = Path(args.app_screenshot).expanduser() if args.app_screenshot else None
+    if args.app_screenshot and not app_shot.exists():
+        sys.exit(f"App screenshot not found: {app_shot}")
+    OUT_HTML.write_text(build_html(args.repo, args.app, shot, args.student, args.sid, app_shot))
     print(f"Wrote {OUT_HTML.relative_to(ROOT)}")
 
     chrome = find_chrome()
