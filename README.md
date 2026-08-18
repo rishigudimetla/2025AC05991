@@ -123,7 +123,7 @@ ml-assignment2/
 │   ├── naive_bayes.joblib
 │   ├── random_forest.joblib
 │   └── gradient_boosting.joblib
-├── tests/test_project.py     # 31 automated checks (data, models, metrics, UI)
+├── tests/test_project.py     # 37 automated checks (data, models, metrics, UI)
 └── tools/                    # README + submission-PDF generators
 ```
 
@@ -305,13 +305,15 @@ of a failed Streamlit deployment.
 
 ## Verification
 
-`tests/test_project.py` runs 31 automated checks with `python -m pytest tests -q`:
+`tests/test_project.py` runs 37 automated checks with `python -m pytest tests -q`:
 
 - dataset meets the ≥ 12 features / ≥ 500 instances requirement;
 - `train_data.csv` and `test_data.csv` are the right size, **disjoint** (no leakage) and stratified;
 - all six artefacts load and predict valid class labels;
 - the five mandated models are present;
 - **re-scoring each artefact reproduces `metrics.json` to 1e-6** — the published table cannot drift;
+- the retrain-from-`train_data.csv` fallback reproduces all six models to 1e-6, so the app
+  degrades safely if an artefact ever fails to unpickle;
 - all six metrics exist for all six models;
 - CSV validation: good file, missing `Target`, missing feature column, extra columns, untidy
   headers, NaN / non-numeric cells, single-class slice;

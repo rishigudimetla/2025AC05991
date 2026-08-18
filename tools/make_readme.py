@@ -164,6 +164,23 @@ def observation_rows() -> str:
     return "\n".join(lines)
 
 
+def test_count() -> str:
+    """Count the collected pytest tests so the README can never quote a stale number."""
+    import subprocess
+
+    try:
+        out = subprocess.run(
+            [sys.executable, "-m", "pytest", "tests", "--collect-only", "-q"],
+            cwd=ROOT, capture_output=True, text=True, timeout=180,
+        ).stdout
+        for line in reversed(out.strip().splitlines()):
+            if "test" in line and line.split()[0].isdigit():
+                return line.split()[0]
+    except Exception:  # noqa: BLE001 - README generation must not depend on pytest
+        pass
+    return "the"
+
+
 def build(repo_url: str, app_url: str) -> str:
     d = METRICS["dataset"]
     s = METRICS["split"]
@@ -171,6 +188,7 @@ def build(repo_url: str, app_url: str) -> str:
     counts = d["class_counts"]
     total = sum(counts.values())
     winner = METRICS["winner"]
+    n_tests = test_count()
 
     param_rows = "\n".join(
         f"| {name} | {params(name)} | {fmt(cv(name))} |"
@@ -308,7 +326,7 @@ ml-assignment2/
 │   ├── naive_bayes.joblib
 │   ├── random_forest.joblib
 │   └── gradient_boosting.joblib
-├── tests/test_project.py     # 31 automated checks (data, models, metrics, UI)
+├── tests/test_project.py     # {n_tests} automated checks (data, models, metrics, UI)
 └── tools/                    # README + submission-PDF generators
 ```
 
@@ -462,13 +480,15 @@ of a failed Streamlit deployment.
 
 ## Verification
 
-`tests/test_project.py` runs 31 automated checks with `python -m pytest tests -q`:
+`tests/test_project.py` runs {n_tests} automated checks with `python -m pytest tests -q`:
 
 - dataset meets the ≥ 12 features / ≥ 500 instances requirement;
 - `train_data.csv` and `test_data.csv` are the right size, **disjoint** (no leakage) and stratified;
 - all six artefacts load and predict valid class labels;
 - the five mandated models are present;
 - **re-scoring each artefact reproduces `metrics.json` to 1e-6** — the published table cannot drift;
+- the retrain-from-`train_data.csv` fallback reproduces all six models to 1e-6, so the app
+  degrades safely if an artefact ever fails to unpickle;
 - all six metrics exist for all six models;
 - CSV validation: good file, missing `Target`, missing feature column, extra columns, untidy
   headers, NaN / non-numeric cells, single-class slice;
